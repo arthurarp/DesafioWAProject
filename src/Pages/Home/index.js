@@ -1,10 +1,32 @@
 import React from 'react';
-import {Container, TitleText} from './styles';
+import {
+  Container,
+  Header,
+  Body,
+  TitleText,
+  SubDescriptionText,
+  ConfirmButton,
+  ConfirmButtonTitle,
+} from './styles';
 
-const Home = () => {
+const Home = ({navigation}) => {
+  const navigateTo = () => {
+    navigation.navigate('Menu');
+  };
+
   return (
     <Container>
-      <TitleText>Home</TitleText>
+      <Header>
+        <TitleText>WA Quizz</TitleText>
+      </Header>
+      <Body>
+        <SubDescriptionText>
+          Select below the number of questions
+        </SubDescriptionText>
+        <ConfirmButton onPress={() => navigateTo()}>
+          <ConfirmButtonTitle>Confirm</ConfirmButtonTitle>
+        </ConfirmButton>
+      </Body>
     </Container>
   );
 };
