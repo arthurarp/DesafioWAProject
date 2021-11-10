@@ -1,12 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import {
   Container,
+  Header,
   QuestionText,
   AnswerText,
   ButtonsContainer,
   ConfirmButton,
   ConfirmButtonTitle,
   AnswerContainer,
+  AnswerButton,
 } from './styles';
 
 const Questions = ({navigation}) => {
@@ -55,14 +57,21 @@ const Questions = ({navigation}) => {
 
     setCorrectAnswer(responseQuestions[listIndex].correct_answer);
     setShuffledAnswers(shuffleAnswers());
+    console.log(shuffleAnswers);
   }, [listIndex]);
 
   const shuffleAnswers = () => {
+    if (responseQuestions[listIndex].type === 'boolean') {
+      let answers = ['True', 'False'];
+      setShuffledAnswers(answers);
+      return answers;
+    }
     const answers = responseQuestions[listIndex].incorrect_answers;
     answers.push(responseQuestions[listIndex].correct_answer);
     const shuffled = answers.sort(() => Math.random() - 0.5);
     console.log(shuffled);
     setShuffledAnswers(shuffled);
+    return shuffled;
   };
 
   const handleNextQuestion = async () => {
@@ -71,20 +80,20 @@ const Questions = ({navigation}) => {
       return;
     }
     setListIndex(listIndex + 1);
+    console.log(shuffleAnswers);
   };
 
   return (
     <Container>
-      <QuestionText>{responseQuestions[listIndex].question}</QuestionText>
+      <Header>
+        <QuestionText>{responseQuestions[listIndex].question}</QuestionText>
+      </Header>
       <AnswerContainer>
-        {responseQuestions[listIndex].type === 'boolean' ? (
-          <>
-            <AnswerText>a) True</AnswerText>
-            <AnswerText>b) False</AnswerText>
-          </>
-        ) : (
-          shuffledAnswers?.map(answer => <AnswerText>{answer}</AnswerText>)
-        )}
+        {shuffledAnswers?.map(answer => (
+          <AnswerButton>
+            <AnswerText>{answer}</AnswerText>
+          </AnswerButton>
+        ))}
       </AnswerContainer>
       <ButtonsContainer>
         <ConfirmButton onPress={handleNextQuestion}>

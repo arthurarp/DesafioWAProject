@@ -8,6 +8,14 @@ export const Container = styled.View`
   justify-content: center;
 `;
 
+export const Header = styled.View`
+  flex: 0.7;
+  width: 100%;
+  padding: ${normalize(10)}px;
+  align-items: center;
+  margin-top: ${normalize(10)}px;
+`;
+
 export const Body = styled.View`
   flex: 1;
   width: 100%;
@@ -24,22 +32,35 @@ export const QuestionText = styled.Text`
 `;
 
 export const AnswerContainer = styled.View`
+  flex: 1;
   height: 40%;
+  padding: ${normalize(10)}px;
   width: 100%;
   margin-top: ${normalize(20)}px;
-  align-items: center;
+  /* align-items: center; */
+  justify-content: flex-start;
+`;
+
+export const AnswerButton = styled.TouchableOpacity`
+  height: 20%;
+  width: 100%;
+  margin-top: ${normalize(20)}px;
   justify-content: center;
+  align-items: flex-start;
+  border-width: 1px;
+  border-radius: ${normalize(7)}px;
+  padding: ${normalize(10)}px;
+  /* background-color: #000; */
 `;
 
 export const AnswerText = styled.Text`
   color: ${theme.colors.black};
   font-size: ${normalize(15)}px;
-  font-weight: bold;
-  margin-top: ${normalize(10)}px;
+  /* margin-left: ${normalize(10)}px; */
 `;
 
 export const ButtonsContainer = styled.View`
-  flex: 1;
+  flex: 0.5;
   width: 100%;
   margin-top: ${normalize(20)}px;
   align-items: center;
