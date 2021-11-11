@@ -56,7 +56,7 @@ export const NumberOfQuestionsInput = styled.TextInput`
 
 export const ConfirmButton = styled.TouchableOpacity`
   width: 70%;
-  height: ${normalize(60)}px;
+  height: ${normalize(50)}px;
   justify-content: center;
   align-items: center;
   border-radius: ${normalize(7)}px;
@@ -65,7 +65,7 @@ export const ConfirmButton = styled.TouchableOpacity`
 
 export const ConfirmButtonTitle = styled.Text`
   color: ${theme.colors.white};
-  font-size: ${normalize(22)}px;
+  font-size: ${normalize(18)}px;
   font-weight: bold;
   align-self: center;
 `;

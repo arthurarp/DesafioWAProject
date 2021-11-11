@@ -9,6 +9,10 @@ import {
   ConfirmButtonTitle,
   AnswerContainer,
   AnswerButton,
+  InformationContainer,
+  InformationItem,
+  ItemText,
+  Icon,
 } from './styles';
 import apiQuestions from '../../services/api';
 import {View, ActivityIndicator} from 'react-native';
@@ -43,6 +47,7 @@ const Questions = ({navigation}) => {
       setShuffledAnswers(shuffleAnswers());
       console.log(shuffleAnswers);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listIndex, isLoading]);
 
   const shuffleAnswers = () => {
@@ -70,10 +75,12 @@ const Questions = ({navigation}) => {
       return;
     }
     setListIndex(listIndex + 1);
+    setSelectedAnswer('');
     console.log(shuffleAnswers);
   };
 
   return isLoading ? (
+    // eslint-disable-next-line react-native/no-inline-styles
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <ActivityIndicator size={50} />
     </View>
@@ -82,6 +89,29 @@ const Questions = ({navigation}) => {
       <Header>
         <QuestionText>{responseQuestions[listIndex].question}</QuestionText>
       </Header>
+      <InformationContainer>
+        <InformationItem>
+          <Icon name="layer-group" />
+          <ItemText>{responseQuestions[listIndex].category}</ItemText>
+        </InformationItem>
+        <InformationItem>
+          {responseQuestions[listIndex].difficulty === 'hard' ? (
+            <>
+              <Icon name="star" solid={true} />
+              <Icon name="star" solid={true} />
+              <Icon name="star" solid={true} />
+            </>
+          ) : responseQuestions[listIndex].difficulty === 'medium' ? (
+            <>
+              <Icon name="star" solid={true} />
+              <Icon name="star" solid={true} />
+            </>
+          ) : (
+            <Icon name="star" solid={true} />
+          )}
+          <ItemText>{responseQuestions[listIndex].difficulty}</ItemText>
+        </InformationItem>
+      </InformationContainer>
       <AnswerContainer>
         {shuffledAnswers?.map(answer => (
           <AnswerButton

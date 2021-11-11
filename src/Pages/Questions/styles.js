@@ -1,6 +1,12 @@
 import styled from 'styled-components/native';
 import normalize from 'react-native-normalize';
 import theme from '../../Theme';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
+
+export const Icon = styled(FontAwesomeIcon).attrs((props) => ({
+  color: props.color ? props.color : theme.colors.black,
+  size: props.size ? props.size : normalize(20),
+}))``;
 
 export const Container = styled.View`
   flex: 1;
@@ -9,19 +15,12 @@ export const Container = styled.View`
 `;
 
 export const Header = styled.View`
-  flex: 0.7;
+  flex: 0.4;
   width: 100%;
   padding: ${normalize(10)}px;
   align-items: center;
   margin-top: ${normalize(10)}px;
-`;
-
-export const Body = styled.View`
-  flex: 1;
-  width: 100%;
-  padding: ${normalize(10)}px;
-  align-items: center;
-  margin-top: ${normalize(10)}px;
+  /* background-color: #F0F; */
 `;
 
 export const QuestionText = styled.Text`
@@ -31,20 +30,46 @@ export const QuestionText = styled.Text`
   margin-top: ${normalize(10)}px;
 `;
 
+export const InformationContainer = styled.View`
+  flex: 0.3;
+  padding: ${normalize(10)}px;
+  justify-content: flex-start;
+  /* background-color: #CCC; */
+`;
+
+export const InformationItem = styled.View`
+  flex: 1;
+  padding: ${normalize(5)}px;
+  width: 100%;
+  /* margin-top: ${normalize(20)}px; */
+  align-items: center;
+  justify-content: flex-start;
+  /* background-color: #00F; */
+  flex-direction: row;
+  /* justify-content: space-around; */
+`;
+
+export const ItemText = styled.Text`
+  color: ${theme.colors.black};
+  font-size: ${normalize(14)}px;
+  margin-left: ${normalize(10)}px;
+`;
+
 export const AnswerContainer = styled.View`
   flex: 1;
-  height: 40%;
+  /* height: 40%; */
   padding: ${normalize(10)}px;
   width: 100%;
-  margin-top: ${normalize(20)}px;
+  /* margin-top: ${normalize(20)}px; */
   /* align-items: center; */
   justify-content: flex-start;
+  /* background-color: #00F; */
 `;
 
 export const AnswerButton = styled.TouchableOpacity`
   height: 20%;
   width: 100%;
-  margin-top: ${normalize(20)}px;
+  margin-bottom: ${normalize(20)}px;
   justify-content: center;
   align-items: flex-start;
   border-width: ${props => (props.selected ? 3 : 1)}px;
@@ -61,18 +86,18 @@ export const AnswerText = styled.Text`
 `;
 
 export const ButtonsContainer = styled.View`
-  flex: 0.5;
+  flex: 0.3;
   width: 100%;
-  margin-top: ${normalize(20)}px;
+  /* margin-top: ${normalize(20)}px; */
   align-items: center;
   justify-content: center;
+  /* background-color: #F00; */
 `;
 
 export const ConfirmButton = styled.TouchableOpacity`
   width: 70%;
-  height: ${normalize(60)}px;
+  height: ${normalize(50)}px;
   justify-content: center;
-  margin-top: ${normalize(20)}px;
   border-radius: ${normalize(7)}px;
   align-items: center;
   background-color: ${props =>
@@ -81,7 +106,7 @@ export const ConfirmButton = styled.TouchableOpacity`
 
 export const ConfirmButtonTitle = styled.Text`
   color: ${theme.colors.white};
-  font-size: ${normalize(22)}px;
+  font-size: ${normalize(18)}px;
   font-weight: bold;
   align-self: center;
 `;
