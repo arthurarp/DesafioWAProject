@@ -10,57 +10,40 @@ import {
   AnswerContainer,
   AnswerButton,
 } from './styles';
+import apiQuestions from '../../services/api';
+import {View, ActivityIndicator} from 'react-native';
 
 const Questions = ({navigation}) => {
   const [listIndex, setListIndex] = useState(0);
   const [correctAnswer, setCorrectAnswer] = useState('');
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
   const [selectedAnswer, setSelectedAnswer] = useState('');
+  const [responseQuestions, setResponseQuestions] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const responseQuestions = [
-    {
-      category: 'Geography',
-      type: 'boolean',
-      difficulty: 'medium',
-      question:
-        'The longest place named in the United States is Lake Chargoggagoggmanchauggagoggchaubunagungamaugg, located near Webster, MA.',
-      correct_answer: 'True',
-      incorrect_answers: ['False'],
-    },
-    {
-      category: 'General Knowledge',
-      type: 'multiple',
-      difficulty: 'medium',
-      question:
-        'In ancient Greece, if your job were a &quot;hippeus&quot; which of these would you own?',
-      correct_answer: 'Horse',
-      incorrect_answers: ['Weave', 'Guitar', 'Boat'],
-    },
-    {
-      category: 'History',
-      type: 'multiple',
-      difficulty: 'hard',
-      question:
-        'Which of these positions did the astronomer and physicist Isaac Newton not hold?',
-      correct_answer: 'Surveyor to the City of London',
-      incorrect_answers: [
-        'Professor of Mathematics',
-        'Warden of the Royal Mint',
-        'Member of Parliament',
-      ],
-    },
-  ];
   useEffect(() => {
-    navigation.setOptions({
-      headerTitle: `Question ${parseInt(listIndex, 10) + 1}/${
-        responseQuestions.length
-      }`,
-    });
+    async function getQuestionsFromApi() {
+      const response = await apiQuestions.get(`/api.php?amount=${10}`);
+      console.log(response.data.results);
+      setResponseQuestions(response.data.results);
+      setIsLoading(false);
+    }
+    getQuestionsFromApi();
+  }, []);
 
-    setCorrectAnswer(responseQuestions[listIndex].correct_answer);
-    setShuffledAnswers(shuffleAnswers());
-    console.log(shuffleAnswers);
-  }, [listIndex]);
+  useEffect(() => {
+    if (!isLoading) {
+      navigation.setOptions({
+        headerTitle: `Question ${parseInt(listIndex, 10) + 1}/${
+          responseQuestions.length
+        }`,
+      });
+
+      setCorrectAnswer(responseQuestions[listIndex].correct_answer);
+      setShuffledAnswers(shuffleAnswers());
+      console.log(shuffleAnswers);
+    }
+  }, [listIndex, isLoading]);
 
   const shuffleAnswers = () => {
     if (responseQuestions[listIndex].type === 'boolean') {
@@ -90,7 +73,11 @@ const Questions = ({navigation}) => {
     console.log(shuffleAnswers);
   };
 
-  return (
+  return isLoading ? (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <ActivityIndicator size={50} />
+    </View>
+  ) : (
     <Container>
       <Header>
         <QuestionText>{responseQuestions[listIndex].question}</QuestionText>
