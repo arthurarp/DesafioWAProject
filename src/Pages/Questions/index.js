@@ -15,6 +15,8 @@ const Questions = ({navigation}) => {
   const [listIndex, setListIndex] = useState(0);
   const [correctAnswer, setCorrectAnswer] = useState('');
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
+  const [selectedAnswer, setSelectedAnswer] = useState('');
+
   const responseQuestions = [
     {
       category: 'Geography',
@@ -74,6 +76,11 @@ const Questions = ({navigation}) => {
     return shuffled;
   };
 
+  const handleSelectAnswer = answer => {
+    console.log(answer);
+    setSelectedAnswer(answer);
+  };
+
   const handleNextQuestion = async () => {
     if (listIndex + 1 === responseQuestions.length) {
       navigation.navigate('Results');
@@ -90,7 +97,9 @@ const Questions = ({navigation}) => {
       </Header>
       <AnswerContainer>
         {shuffledAnswers?.map(answer => (
-          <AnswerButton>
+          <AnswerButton
+            selected={answer === selectedAnswer ? true : false}
+            onPress={() => handleSelectAnswer(answer)}>
             <AnswerText>{answer}</AnswerText>
           </AnswerButton>
         ))}

@@ -47,9 +47,10 @@ export const AnswerButton = styled.TouchableOpacity`
   margin-top: ${normalize(20)}px;
   justify-content: center;
   align-items: flex-start;
-  border-width: 1px;
+  border-width: ${props => (props.selected ? 3 : 1)}px;
   border-radius: ${normalize(7)}px;
   padding: ${normalize(10)}px;
+  border-color: ${props => (props.selected ? theme.colors.primary : '#000')};
   /* background-color: #000; */
 `;
 
