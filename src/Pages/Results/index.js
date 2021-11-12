@@ -17,6 +17,7 @@ import {
 import {View, ActivityIndicator, FlatList} from 'react-native';
 import {getReportFromLocalDatabase} from '../../services/storage';
 import {decode} from 'html-entities';
+import normalize from 'react-native-normalize';
 
 const Results = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +27,6 @@ const Results = ({navigation}) => {
   useEffect(() => {
     async function getReportData() {
       const report = await getReportFromLocalDatabase();
-      console.log(report);
       setQuestions(report.questions);
       setCorrectAnswers(report.userScore);
       setDateTime(report.date);
@@ -50,7 +50,10 @@ const Results = ({navigation}) => {
           name={rightAnswer ? 'check' : 'times'}
           solid={true}
           color={rightAnswer ? '#00c200' : '#F00'}
+          style={{marginBottom: normalize(18)}}
         />
+        <AnswerText>Other options: </AnswerText>
+        <AnswerText>{item.incorrect_answers.join('; ')} </AnswerText>
       </QuestionContainer>
     );
   };
@@ -66,7 +69,8 @@ const Results = ({navigation}) => {
       </Header>
       <DetailsContainer>
         <DetailsText>
-          You answered {correctAnswers} out of {questions.length} questions right
+          You answered {correctAnswers} out of {questions.length} questions
+          right
         </DetailsText>
         <DetailsText color="#a1a1a1">{dateTime}</DetailsText>
       </DetailsContainer>

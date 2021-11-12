@@ -73,8 +73,6 @@ const Questions = ({navigation}) => {
   };
 
   const handleSelectAnswer = answer => {
-    console.log('selected answer: ', answer);
-    console.log('correct answer: ', correctAnswer);
     setSelectedAnswer(decode(answer));
   };
 
@@ -113,23 +111,23 @@ const Questions = ({navigation}) => {
       <DetailsContainer>
         <InformationContainer>
           <InformationItem>
-            <Icon name="layer-group" />
+            <Icon name="layer-group" color="#9c21ca" />
             <ItemText>{responseQuestions[listIndex].category}</ItemText>
           </InformationItem>
           <InformationItem>
             {responseQuestions[listIndex].difficulty === 'hard' ? (
               <>
-                <Icon name="star" solid={true} />
-                <Icon name="star" solid={true} />
-                <Icon name="star" solid={true} />
+                <Icon name="star" solid={true} color="#23d4bd" />
+                <Icon name="star" solid={true} color="#23d4bd" />
+                <Icon name="star" solid={true} color="#23d4bd" />
               </>
             ) : responseQuestions[listIndex].difficulty === 'medium' ? (
               <>
-                <Icon name="star" solid={true} />
-                <Icon name="star" solid={true} />
+                <Icon name="star" solid={true} color="#23d4bd" />
+                <Icon name="star" solid={true} color="#23d4bd" />
               </>
             ) : (
-              <Icon name="star" solid={true} />
+              <Icon name="star" solid={true} color="#23d4bd" />
             )}
             <ItemText>{responseQuestions[listIndex].difficulty}</ItemText>
           </InformationItem>

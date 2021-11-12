@@ -16,7 +16,7 @@ export const Container = styled.View`
 `;
 
 export const Header = styled.View`
-  flex: 0.4;
+  flex: 0.2;
   width: 100%;
   padding: ${normalize(10)}px;
   align-items: center;
@@ -46,7 +46,7 @@ export const DetailsText = styled.Text`
 `;
 
 export const QuestionContainer = styled.View`
-  height: ${normalize(220)}px;
+  height: ${normalize(300)}px;
   width: 100%;
   padding: ${normalize(10)}px;
   margin-bottom: ${normalize(20)}px;
@@ -76,7 +76,7 @@ export const ResultText = styled.Text`
 `;
 
 export const ButtonsContainer = styled.View`
-  flex: 0.3;
+  flex: 0.2;
   width: 100%;
   align-items: center;
   justify-content: center;
