@@ -139,8 +139,14 @@ const Questions = ({navigation}) => {
         ))}
       </AnswerContainer>
       <ButtonsContainer>
-        <ConfirmButton onPress={handleNextQuestion}>
-          <ConfirmButtonTitle>Next Question</ConfirmButtonTitle>
+        <ConfirmButton
+          onPress={!selectedAnswer ? () => {} : handleNextQuestion}
+          color={!selectedAnswer ? '#a1a1a1' : null}>
+          <ConfirmButtonTitle>
+            {listIndex + 1 === responseQuestions.length
+              ? 'Finish'
+              : 'Next Question'}
+          </ConfirmButtonTitle>
         </ConfirmButton>
       </ButtonsContainer>
     </Container>
