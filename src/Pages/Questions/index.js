@@ -19,7 +19,7 @@ import {
 } from './styles';
 import apiQuestions from '../../services/api';
 import {storeReportDataOnLocalDatabase} from '../../services/storage';
-import {View, ActivityIndicator} from 'react-native';
+import {View, ActivityIndicator, Alert} from 'react-native';
 import {decode} from 'html-entities';
 import NumberOfQuestionsContext from '../../contexts/numberOfQuestions';
 
@@ -33,6 +33,7 @@ const Questions = ({navigation}) => {
   const [score, setScore] = useState(0);
   const [report, setReport] = useState([]);
   const {numberOfQuestions} = useContext(NumberOfQuestionsContext);
+
   useEffect(() => {
     async function getQuestionsFromApi() {
       const response = await apiQuestions.get(
@@ -47,7 +48,7 @@ const Questions = ({navigation}) => {
   useEffect(() => {
     if (!isLoading) {
       navigation.setOptions({
-        headerTitle: `Question ${parseInt(listIndex, 10) + 1}/${
+        title: `Question ${parseInt(listIndex, 10) + 1}/${
           responseQuestions.length
         }`,
       });
@@ -135,7 +136,7 @@ const Questions = ({navigation}) => {
         </InformationContainer>
         <ScoreContainer>
           <Icon name="award" color="#dbc300" size={25} />
-          <ScoreText>{score}</ScoreText>
+          <ScoreText>{score} pts</ScoreText>
         </ScoreContainer>
       </DetailsContainer>
       <AnswerContainer>
@@ -149,7 +150,12 @@ const Questions = ({navigation}) => {
       </AnswerContainer>
       <ButtonsContainer>
         <ConfirmButton
-          onPress={!selectedAnswer ? () => {} : handleNextQuestion}
+          onPress={
+            !selectedAnswer
+              ? () =>
+                  Alert.alert('Warning!', 'Please select an option to proceed.')
+              : handleNextQuestion
+          }
           color={!selectedAnswer ? '#a1a1a1' : null}>
           <ConfirmButtonTitle>
             {listIndex + 1 === responseQuestions.length

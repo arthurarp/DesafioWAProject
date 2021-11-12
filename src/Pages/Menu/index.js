@@ -1,14 +1,19 @@
 import React from 'react';
 import {
   Container,
+  Body,
   ButtonsContainer,
   ConfirmButton,
   ConfirmButtonTitle,
+  DescriptionText,
 } from './styles';
 
 const Menu = ({navigation}) => {
   return (
     <Container>
+      <Body>
+        <DescriptionText>Get ready to play!</DescriptionText>
+      </Body>
       <ButtonsContainer>
         <ConfirmButton onPress={() => navigation.navigate('Questions')}>
           <ConfirmButtonTitle>Start</ConfirmButtonTitle>

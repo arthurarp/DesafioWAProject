@@ -47,7 +47,6 @@ export const ScoreContainer = styled.View`
   flex: 0.2;
   padding: ${normalize(10)}px;
   justify-content: flex-start;
-  /* background-color: #FF0; */
   border-radius: ${normalize(7)}px;
   align-items: center;
   border-width: 1px;

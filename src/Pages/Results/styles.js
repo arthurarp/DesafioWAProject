@@ -20,7 +20,6 @@ export const Header = styled.View`
   width: 100%;
   padding: ${normalize(10)}px;
   align-items: center;
-  /* background-color: #a1a1; */
 `;
 
 export const HeaderText = styled.Text`
@@ -37,7 +36,6 @@ export const DetailsContainer = styled.View`
   align-items: center;
   justify-content: center;
   padding: ${normalize(10)}px;
-  /* background-color: #ccc; */
 `;
 
 export const DetailsText = styled.Text`
@@ -48,12 +46,10 @@ export const DetailsText = styled.Text`
 `;
 
 export const QuestionContainer = styled.View`
-  /* flex: 1; */
   height: ${normalize(220)}px;
   width: 100%;
   padding: ${normalize(10)}px;
   margin-bottom: ${normalize(20)}px;
-  /* align-items: center; */
   background-color: #dedede;
   border-radius: ${normalize(7)}px;
 `;
@@ -85,7 +81,6 @@ export const ButtonsContainer = styled.View`
   align-items: center;
   justify-content: center;
   padding: ${normalize(10)}px;
-  /* background-color: #ccc; */
 `;
 
 export const ConfirmButton = styled.TouchableOpacity`

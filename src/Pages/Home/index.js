@@ -53,7 +53,7 @@ const Home = ({navigation}) => {
   return (
     <Container>
       <Header>
-        <TitleText>WA Quizz</TitleText>
+        <TitleText>WA Quiz</TitleText>
       </Header>
       <Body>
         <SubDescriptionText>
@@ -63,6 +63,7 @@ const Home = ({navigation}) => {
           keyboardType="numeric"
           onChangeText={number => setSelectedNumber(number)}
           value={selectedNumber.toString()}
+          placeholder="Máx 50"
         />
         <ConfirmButton
           color={!isValidNumber ? '#a1a1a1' : null}
@@ -76,7 +77,7 @@ const Home = ({navigation}) => {
         </ConfirmButton>
         {existsSavedReport ? (
           <ConfirmButton onPress={() => navigateTo('Results')}>
-            <ConfirmButtonTitle>See saved report</ConfirmButtonTitle>
+            <ConfirmButtonTitle>See last saved report</ConfirmButtonTitle>
           </ConfirmButton>
         ) : null}
       </Body>

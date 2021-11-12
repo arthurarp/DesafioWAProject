@@ -66,7 +66,7 @@ const Results = ({navigation}) => {
       </Header>
       <DetailsContainer>
         <DetailsText>
-          You answered {correctAnswers} out of {questions.length} questions
+          You answered {correctAnswers} out of {questions.length} questions right
         </DetailsText>
         <DetailsText color="#a1a1a1">{dateTime}</DetailsText>
       </DetailsContainer>
