@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   Container,
   Header,
@@ -21,6 +21,7 @@ import apiQuestions from '../../services/api';
 import {storeReportDataOnLocalDatabase} from '../../services/storage';
 import {View, ActivityIndicator} from 'react-native';
 import {decode} from 'html-entities';
+import NumberOfQuestionsContext from '../../contexts/numberOfQuestions';
 
 const Questions = ({navigation}) => {
   const [listIndex, setListIndex] = useState(0);
@@ -31,10 +32,12 @@ const Questions = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [score, setScore] = useState(0);
   const [report, setReport] = useState([]);
-
+  const {numberOfQuestions} = useContext(NumberOfQuestionsContext);
   useEffect(() => {
     async function getQuestionsFromApi() {
-      const response = await apiQuestions.get(`/api.php?amount=${4}`);
+      const response = await apiQuestions.get(
+        `/api.php?amount=${numberOfQuestions}`,
+      );
       setResponseQuestions(response.data.results);
       setIsLoading(false);
     }
@@ -64,7 +67,6 @@ const Questions = ({navigation}) => {
     const answers = responseQuestions[listIndex].incorrect_answers;
     answers.push(responseQuestions[listIndex].correct_answer);
     const shuffled = answers.sort(() => Math.random() - 0.5);
-    // console.log(shuffled);
     setShuffledAnswers(shuffled);
     return shuffled;
   };

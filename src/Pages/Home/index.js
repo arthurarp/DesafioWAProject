@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {Alert} from 'react-native';
 import {
   Container,
@@ -12,14 +12,18 @@ import {
 } from './styles';
 import {getAllKeysFromLocalDatabase} from '../../services/storage';
 import {useIsFocused} from '@react-navigation/native';
+import NumberOfQuestionsContext from '../../contexts/numberOfQuestions';
 
 const Home = ({navigation}) => {
-  const [selectedNumber, setSelectedNumber] = useState(0);
+  const [selectedNumber, setSelectedNumber] = useState('');
   const [isValidNumber, setIsValidNumber] = useState(false);
   const [existsSavedReport, setExistsSavedReport] = useState(false);
   const isFocused = useIsFocused();
+  const {setNumberOfQuestions} = useContext(NumberOfQuestionsContext);
+
   const navigateTo = route => {
-    setSelectedNumber(0);
+    setSelectedNumber('');
+    setNumberOfQuestions(selectedNumber);
     navigation.navigate(route);
   };
 
@@ -58,7 +62,7 @@ const Home = ({navigation}) => {
         <NumberOfQuestionsInput
           keyboardType="numeric"
           onChangeText={number => setSelectedNumber(number)}
-          value={selectedNumber}
+          value={selectedNumber.toString()}
         />
         <ConfirmButton
           color={!isValidNumber ? '#a1a1a1' : null}
