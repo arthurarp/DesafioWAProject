@@ -64,6 +64,8 @@ const Home = ({navigation}) => {
           onChangeText={number => setSelectedNumber(number)}
           value={selectedNumber.toString()}
           placeholder="Máx 50"
+          placeholderTextColor="#a1a1a1"
+          color= "#000"
         />
         <ConfirmButton
           color={!isValidNumber ? '#a1a1a1' : null}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   Container,
   Body,
@@ -6,13 +6,17 @@ import {
   ConfirmButton,
   ConfirmButtonTitle,
   DescriptionText,
+  SubDescriptionText,
 } from './styles';
+import NumberOfQuestionsContext from '../../contexts/numberOfQuestions';
 
 const Menu = ({navigation}) => {
+  const {numberOfQuestions} = useContext(NumberOfQuestionsContext);
   return (
     <Container>
       <Body>
         <DescriptionText>Get ready to play!</DescriptionText>
+        <SubDescriptionText>{numberOfQuestions} questions</SubDescriptionText>
       </Body>
       <ButtonsContainer>
         <ConfirmButton onPress={() => navigation.navigate('Questions')}>

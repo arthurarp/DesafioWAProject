@@ -6,6 +6,7 @@ export const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
+  padding: ${normalize(10)}px;
 `;
 
 export const Body = styled.View`
@@ -20,6 +21,12 @@ export const DescriptionText = styled.Text`
   color: ${theme.colors.primary};
   font-size: ${normalize(25)}px;
   font-weight: bold;
+`;
+
+export const SubDescriptionText = styled.Text`
+  color: ${theme.colors.primary};
+  font-size: ${normalize(18)}px;
+  margin-top: ${normalize(10)}px;
 `;
 
 export const ButtonsContainer = styled.View`
