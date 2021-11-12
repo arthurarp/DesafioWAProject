@@ -11,6 +11,8 @@ import {
   DetailsContainer,
   DetailsText,
   AnswerText,
+  ResultText,
+  Icon,
 } from './styles';
 import {View, ActivityIndicator, FlatList} from 'react-native';
 import {getReportFromLocalDatabase} from '../../services/storage';
@@ -33,11 +35,20 @@ const Results = ({navigation}) => {
   }, []);
 
   const renderQuestion = ({item}) => {
+    const rightAnswer = item.userResponse === decode(item.correct_answer);
     return (
       <QuestionContainer>
         <QuestionText>{decode(item.question)}</QuestionText>
-        <AnswerText>Correct answer: {item.correct_answer}</AnswerText>
+        <AnswerText>Correct answer: {decode(item.correct_answer)}</AnswerText>
         <AnswerText>Your answer: {item.userResponse}</AnswerText>
+        <ResultText color={rightAnswer ? '#00c200' : null}>
+          {rightAnswer ? 'Correct!' : 'Wrong!'}
+        </ResultText>
+        <Icon
+          name={rightAnswer ? 'check' : 'times'}
+          solid={true}
+          color={rightAnswer ? '#00c200' : '#F00'}
+        />
       </QuestionContainer>
     );
   };
@@ -64,7 +75,7 @@ const Results = ({navigation}) => {
       />
       <ButtonsContainer>
         <ConfirmButton onPress={() => navigation.navigate('Home')}>
-          <ConfirmButtonTitle>Return to Home</ConfirmButtonTitle>
+          <ConfirmButtonTitle>Back to Home</ConfirmButtonTitle>
         </ConfirmButton>
       </ButtonsContainer>
     </Container>

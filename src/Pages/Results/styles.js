@@ -1,15 +1,22 @@
 import styled from 'styled-components/native';
 import normalize from 'react-native-normalize';
 import theme from '../../Theme';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
+
+export const Icon = styled(FontAwesomeIcon).attrs((props) => ({
+  color: props.color ? props.color : theme.colors.black,
+  size: props.size ? props.size : normalize(20),
+}))``;
 
 export const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
+  padding: ${normalize(10)}px;
 `;
 
 export const Header = styled.View`
-  flex: 0.2;
+  flex: 0.4;
   width: 100%;
   padding: ${normalize(10)}px;
   align-items: center;
@@ -19,6 +26,7 @@ export const Header = styled.View`
 export const HeaderText = styled.Text`
   color: ${theme.colors.primary};
   margin-top: ${normalize(20)}px;
+  padding: ${normalize(10)}px;
   font-size: ${normalize(25)}px;
   font-weight: bold;
 `;
@@ -28,6 +36,7 @@ export const DetailsContainer = styled.View`
   width: 100%;
   align-items: center;
   justify-content: center;
+  padding: ${normalize(10)}px;
   /* background-color: #ccc; */
 `;
 
@@ -40,12 +49,12 @@ export const DetailsText = styled.Text`
 
 export const QuestionContainer = styled.View`
   /* flex: 1; */
-  height: ${normalize(250)}px;
+  height: ${normalize(220)}px;
   width: 100%;
   padding: ${normalize(10)}px;
   margin-bottom: ${normalize(20)}px;
   /* align-items: center; */
-  background-color: #ccc;
+  background-color: #dedede;
   border-radius: ${normalize(7)}px;
 `;
 
@@ -59,8 +68,15 @@ export const QuestionText = styled.Text`
 
 export const AnswerText = styled.Text`
   color: ${theme.colors.black};
-  font-size: ${normalize(14)}px;
+  font-size: ${normalize(16)}px;
   font-weight: bold;
+`;
+
+export const ResultText = styled.Text`
+  color: ${props => (props.color ? props.color : '#F00')};
+  font-size: ${normalize(16)}px;
+  font-weight: bold;
+  margin-top: ${normalize(20)}px;
 `;
 
 export const ButtonsContainer = styled.View`
@@ -68,6 +84,7 @@ export const ButtonsContainer = styled.View`
   width: 100%;
   align-items: center;
   justify-content: center;
+  padding: ${normalize(10)}px;
   /* background-color: #ccc; */
 `;
 
