@@ -13,9 +13,13 @@ import {
   InformationItem,
   ItemText,
   Icon,
+  DetailsContainer,
+  ScoreContainer,
+  ScoreText,
 } from './styles';
 import apiQuestions from '../../services/api';
 import {View, ActivityIndicator} from 'react-native';
+import {decode} from 'html-entities';
 
 const Questions = ({navigation}) => {
   const [listIndex, setListIndex] = useState(0);
@@ -24,6 +28,7 @@ const Questions = ({navigation}) => {
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [responseQuestions, setResponseQuestions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     async function getQuestionsFromApi() {
@@ -43,11 +48,11 @@ const Questions = ({navigation}) => {
         }`,
       });
 
-      setCorrectAnswer(responseQuestions[listIndex].correct_answer);
+      setCorrectAnswer(decode(responseQuestions[listIndex].correct_answer));
       setShuffledAnswers(shuffleAnswers());
       console.log(shuffleAnswers);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listIndex, isLoading]);
 
   const shuffleAnswers = () => {
@@ -65,11 +70,15 @@ const Questions = ({navigation}) => {
   };
 
   const handleSelectAnswer = answer => {
-    console.log(answer);
+    console.log('selected answer: ', answer);
+    console.log('correct answer: ', correctAnswer);
     setSelectedAnswer(answer);
   };
 
   const handleNextQuestion = async () => {
+    if (selectedAnswer === correctAnswer) {
+      setScore(score + 1);
+    }
     if (listIndex + 1 === responseQuestions.length) {
       navigation.navigate('Results');
       return;
@@ -87,37 +96,45 @@ const Questions = ({navigation}) => {
   ) : (
     <Container>
       <Header>
-        <QuestionText>{responseQuestions[listIndex].question}</QuestionText>
+        <QuestionText>
+          {decode(responseQuestions[listIndex].question)}
+        </QuestionText>
       </Header>
-      <InformationContainer>
-        <InformationItem>
-          <Icon name="layer-group" />
-          <ItemText>{responseQuestions[listIndex].category}</ItemText>
-        </InformationItem>
-        <InformationItem>
-          {responseQuestions[listIndex].difficulty === 'hard' ? (
-            <>
+      <DetailsContainer>
+        <InformationContainer>
+          <InformationItem>
+            <Icon name="layer-group" />
+            <ItemText>{responseQuestions[listIndex].category}</ItemText>
+          </InformationItem>
+          <InformationItem>
+            {responseQuestions[listIndex].difficulty === 'hard' ? (
+              <>
+                <Icon name="star" solid={true} />
+                <Icon name="star" solid={true} />
+                <Icon name="star" solid={true} />
+              </>
+            ) : responseQuestions[listIndex].difficulty === 'medium' ? (
+              <>
+                <Icon name="star" solid={true} />
+                <Icon name="star" solid={true} />
+              </>
+            ) : (
               <Icon name="star" solid={true} />
-              <Icon name="star" solid={true} />
-              <Icon name="star" solid={true} />
-            </>
-          ) : responseQuestions[listIndex].difficulty === 'medium' ? (
-            <>
-              <Icon name="star" solid={true} />
-              <Icon name="star" solid={true} />
-            </>
-          ) : (
-            <Icon name="star" solid={true} />
-          )}
-          <ItemText>{responseQuestions[listIndex].difficulty}</ItemText>
-        </InformationItem>
-      </InformationContainer>
+            )}
+            <ItemText>{responseQuestions[listIndex].difficulty}</ItemText>
+          </InformationItem>
+        </InformationContainer>
+        <ScoreContainer>
+          <Icon name="award" color="#dbc300" size={30} />
+          <ScoreText>{score}</ScoreText>
+        </ScoreContainer>
+      </DetailsContainer>
       <AnswerContainer>
         {shuffledAnswers?.map(answer => (
           <AnswerButton
             selected={answer === selectedAnswer ? true : false}
-            onPress={() => handleSelectAnswer(answer)}>
-            <AnswerText>{answer}</AnswerText>
+            onPress={() => handleSelectAnswer(decode(answer))}>
+            <AnswerText>{decode(answer)}</AnswerText>
           </AnswerButton>
         ))}
       </AnswerContainer>

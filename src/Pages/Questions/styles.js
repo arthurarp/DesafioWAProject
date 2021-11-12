@@ -18,9 +18,8 @@ export const Header = styled.View`
   flex: 0.4;
   width: 100%;
   padding: ${normalize(10)}px;
-  align-items: center;
+  align-items: flex-start;
   margin-top: ${normalize(10)}px;
-  /* background-color: #F0F; */
 `;
 
 export const QuestionText = styled.Text`
@@ -28,25 +27,47 @@ export const QuestionText = styled.Text`
   font-size: ${normalize(18)}px;
   font-weight: bold;
   margin-top: ${normalize(10)}px;
+  text-align: justify;
 `;
 
-export const InformationContainer = styled.View`
+export const DetailsContainer = styled.View`
   flex: 0.3;
   padding: ${normalize(10)}px;
   justify-content: flex-start;
-  /* background-color: #CCC; */
+  flex-direction: row;
+`;
+
+export const InformationContainer = styled.View`
+  flex: 1;
+  padding: ${normalize(10)}px;
+  justify-content: flex-start;
+`;
+
+export const ScoreContainer = styled.View`
+  flex: 0.2;
+  padding: ${normalize(10)}px;
+  justify-content: flex-start;
+  /* background-color: #FF0; */
+  border-radius: ${normalize(7)}px;
+  align-items: center;
+  border-width: 1px;
+  border-color: ${theme.colors.primary};
+`;
+
+export const ScoreText = styled.Text`
+  color: ${theme.colors.primary};
+  font-size: ${normalize(25)}px;
+  font-weight: bold;
+  margin-top: ${normalize(10)}px;
 `;
 
 export const InformationItem = styled.View`
   flex: 1;
   padding: ${normalize(5)}px;
   width: 100%;
-  /* margin-top: ${normalize(20)}px; */
   align-items: center;
   justify-content: flex-start;
-  /* background-color: #00F; */
   flex-direction: row;
-  /* justify-content: space-around; */
 `;
 
 export const ItemText = styled.Text`
@@ -57,13 +78,9 @@ export const ItemText = styled.Text`
 
 export const AnswerContainer = styled.View`
   flex: 1;
-  /* height: 40%; */
   padding: ${normalize(10)}px;
   width: 100%;
-  /* margin-top: ${normalize(20)}px; */
-  /* align-items: center; */
   justify-content: flex-start;
-  /* background-color: #00F; */
 `;
 
 export const AnswerButton = styled.TouchableOpacity`
@@ -76,22 +93,18 @@ export const AnswerButton = styled.TouchableOpacity`
   border-radius: ${normalize(7)}px;
   padding: ${normalize(10)}px;
   border-color: ${props => (props.selected ? theme.colors.primary : '#000')};
-  /* background-color: #000; */
 `;
 
 export const AnswerText = styled.Text`
   color: ${theme.colors.black};
   font-size: ${normalize(15)}px;
-  /* margin-left: ${normalize(10)}px; */
 `;
 
 export const ButtonsContainer = styled.View`
   flex: 0.3;
   width: 100%;
-  /* margin-top: ${normalize(20)}px; */
   align-items: center;
   justify-content: center;
-  /* background-color: #F00; */
 `;
 
 export const ConfirmButton = styled.TouchableOpacity`
