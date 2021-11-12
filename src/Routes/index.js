@@ -17,13 +17,21 @@ export default function Routes() {
           component={Home}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="Menu" component={Menu} />
+        <Stack.Screen
+          name="Menu"
+          component={Menu}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Questions"
           component={Questions}
           options={{headerTitle: props => props.title, headerLeft: () => null}}
         />
-        <Stack.Screen name="Results" component={Results} />
+        <Stack.Screen
+          name="Results"
+          component={Results}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -34,8 +34,7 @@ const Questions = ({navigation}) => {
 
   useEffect(() => {
     async function getQuestionsFromApi() {
-      const response = await apiQuestions.get(`/api.php?amount=${3}`);
-      // console.log(response.data.results);
+      const response = await apiQuestions.get(`/api.php?amount=${4}`);
       setResponseQuestions(response.data.results);
       setIsLoading(false);
     }
@@ -77,16 +76,18 @@ const Questions = ({navigation}) => {
   };
 
   const handleNextQuestion = async () => {
-    const roundReport = responseQuestions[listIndex];
-    roundReport.userResponse = selectedAnswer;
     if (selectedAnswer === correctAnswer) {
       setScore(score + 1);
     }
+    const roundReport = responseQuestions[listIndex];
+    roundReport.userResponse = selectedAnswer;
     setReport([...report, roundReport]);
     if (listIndex + 1 === responseQuestions.length) {
       navigation.navigate('Results');
-      console.log(report);
-      await storeReportDataOnLocalDatabase(report);
+      await storeReportDataOnLocalDatabase({
+        questions: [...report, roundReport],
+        userScore: selectedAnswer === correctAnswer ? score + 1 : score,
+      });
       return;
     }
     setListIndex(listIndex + 1);
