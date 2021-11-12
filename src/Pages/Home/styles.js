@@ -47,10 +47,12 @@ export const SubDescriptionText = styled.Text`
 
 export const NumberOfQuestionsInput = styled.TextInput`
   width: 20%;
-  height: 20%;
+  height: 15%;
   padding: ${normalize(10)}px;
   align-items: flex-start;
   margin-top: ${normalize(10)}px;
+  margin-bottom: ${normalize(10)}px;
+  border-radius: ${normalize(7)}px;
   border-width: 1px;
 `;
 
@@ -60,7 +62,9 @@ export const ConfirmButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   border-radius: ${normalize(7)}px;
-  background-color: ${theme.colors.primary};
+  margin-top: ${normalize(20)}px;
+  background-color: ${props =>
+    props.color ? props.color : theme.colors.primary};
 `;
 
 export const ConfirmButtonTitle = styled.Text`

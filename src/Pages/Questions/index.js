@@ -87,6 +87,7 @@ const Questions = ({navigation}) => {
       await storeReportDataOnLocalDatabase({
         questions: [...report, roundReport],
         userScore: selectedAnswer === correctAnswer ? score + 1 : score,
+        date: new Date(),
       });
       return;
     }
@@ -131,7 +132,7 @@ const Questions = ({navigation}) => {
           </InformationItem>
         </InformationContainer>
         <ScoreContainer>
-          <Icon name="award" color="#dbc300" size={30} />
+          <Icon name="award" color="#dbc300" size={25} />
           <ScoreText>{score}</ScoreText>
         </ScoreContainer>
       </DetailsContainer>

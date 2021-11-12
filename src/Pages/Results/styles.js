@@ -3,7 +3,7 @@ import normalize from 'react-native-normalize';
 import theme from '../../Theme';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 
-export const Icon = styled(FontAwesomeIcon).attrs((props) => ({
+export const Icon = styled(FontAwesomeIcon).attrs(props => ({
   color: props.color ? props.color : theme.colors.black,
   size: props.size ? props.size : normalize(20),
 }))``;
@@ -41,7 +41,7 @@ export const DetailsContainer = styled.View`
 `;
 
 export const DetailsText = styled.Text`
-  color: ${theme.colors.primary};
+  color: ${props => (props.color ? props.color : theme.colors.primary)};
   margin-top: ${normalize(20)}px;
   font-size: ${normalize(18)}px;
   font-weight: bold;

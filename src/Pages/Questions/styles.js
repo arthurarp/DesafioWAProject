@@ -3,9 +3,9 @@ import normalize from 'react-native-normalize';
 import theme from '../../Theme';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 
-export const Icon = styled(FontAwesomeIcon).attrs((props) => ({
+export const Icon = styled(FontAwesomeIcon).attrs(props => ({
   color: props.color ? props.color : theme.colors.black,
-  size: props.size ? props.size : normalize(20),
+  size: props.size ? normalize(props.size) : normalize(20),
 }))``;
 
 export const Container = styled.View`
@@ -56,7 +56,7 @@ export const ScoreContainer = styled.View`
 
 export const ScoreText = styled.Text`
   color: ${theme.colors.primary};
-  font-size: ${normalize(25)}px;
+  font-size: ${normalize(20)}px;
   font-weight: bold;
   margin-top: ${normalize(10)}px;
 `;

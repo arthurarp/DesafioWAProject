@@ -19,3 +19,13 @@ export const storeReportDataOnLocalDatabase = async reportData => {
     // saving error
   }
 };
+
+export const getAllKeysFromLocalDatabase = async () => {
+  let keys = [];
+  try {
+    keys = await AsyncStorage.getAllKeys();
+    return keys;
+  } catch (e) {
+    // read key error
+  }
+};

@@ -22,12 +22,14 @@ const Results = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [questions, setQuestions] = useState([]);
   const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [dateTime, setDateTime] = useState(new Date());
   useEffect(() => {
     async function getReportData() {
       const report = await getReportFromLocalDatabase();
       console.log(report);
       setQuestions(report.questions);
       setCorrectAnswers(report.userScore);
+      setDateTime(report.date);
       setIsLoading(false);
     }
 
@@ -66,8 +68,10 @@ const Results = ({navigation}) => {
         <DetailsText>
           You answered {correctAnswers} out of {questions.length} questions
         </DetailsText>
+        <DetailsText color="#a1a1a1">{dateTime}</DetailsText>
       </DetailsContainer>
       <FlatList
+        // eslint-disable-next-line react-native/no-inline-styles
         style={{flex: 1}}
         data={questions}
         keyExtractor={item => item.id}
