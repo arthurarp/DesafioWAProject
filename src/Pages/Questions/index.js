@@ -18,6 +18,7 @@ import {
   ScoreText,
 } from './styles';
 import apiQuestions from '../../services/api';
+import {storeReportDataOnLocalDatabase} from '../../services/storage';
 import {View, ActivityIndicator} from 'react-native';
 import {decode} from 'html-entities';
 
@@ -29,11 +30,12 @@ const Questions = ({navigation}) => {
   const [responseQuestions, setResponseQuestions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [score, setScore] = useState(0);
+  const [report, setReport] = useState([]);
 
   useEffect(() => {
     async function getQuestionsFromApi() {
-      const response = await apiQuestions.get(`/api.php?amount=${10}`);
-      console.log(response.data.results);
+      const response = await apiQuestions.get(`/api.php?amount=${3}`);
+      // console.log(response.data.results);
       setResponseQuestions(response.data.results);
       setIsLoading(false);
     }
@@ -50,7 +52,6 @@ const Questions = ({navigation}) => {
 
       setCorrectAnswer(decode(responseQuestions[listIndex].correct_answer));
       setShuffledAnswers(shuffleAnswers());
-      console.log(shuffleAnswers);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listIndex, isLoading]);
@@ -64,7 +65,7 @@ const Questions = ({navigation}) => {
     const answers = responseQuestions[listIndex].incorrect_answers;
     answers.push(responseQuestions[listIndex].correct_answer);
     const shuffled = answers.sort(() => Math.random() - 0.5);
-    console.log(shuffled);
+    // console.log(shuffled);
     setShuffledAnswers(shuffled);
     return shuffled;
   };
@@ -72,20 +73,24 @@ const Questions = ({navigation}) => {
   const handleSelectAnswer = answer => {
     console.log('selected answer: ', answer);
     console.log('correct answer: ', correctAnswer);
-    setSelectedAnswer(answer);
+    setSelectedAnswer(decode(answer));
   };
 
   const handleNextQuestion = async () => {
+    const roundReport = responseQuestions[listIndex];
+    roundReport.userResponse = selectedAnswer;
     if (selectedAnswer === correctAnswer) {
       setScore(score + 1);
     }
+    setReport([...report, roundReport]);
     if (listIndex + 1 === responseQuestions.length) {
       navigation.navigate('Results');
+      console.log(report);
+      await storeReportDataOnLocalDatabase(report);
       return;
     }
     setListIndex(listIndex + 1);
     setSelectedAnswer('');
-    console.log(shuffleAnswers);
   };
 
   return isLoading ? (
@@ -132,7 +137,7 @@ const Questions = ({navigation}) => {
       <AnswerContainer>
         {shuffledAnswers?.map(answer => (
           <AnswerButton
-            selected={answer === selectedAnswer ? true : false}
+            selected={decode(answer) === selectedAnswer ? true : false}
             onPress={() => handleSelectAnswer(decode(answer))}>
             <AnswerText>{decode(answer)}</AnswerText>
           </AnswerButton>

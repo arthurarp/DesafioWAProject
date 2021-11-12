@@ -8,7 +8,7 @@ export const Container = styled.View`
   justify-content: center;
 `;
 
-export const Body = styled.View`
+export const ReportList = styled.View`
   flex: 1;
   width: 100%;
   padding: ${normalize(10)}px;

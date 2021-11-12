@@ -13,7 +13,9 @@ const Menu = ({navigation}) => {
         <ConfirmButton onPress={() => navigation.navigate('Questions')}>
           <ConfirmButtonTitle>Start</ConfirmButtonTitle>
         </ConfirmButton>
-        <ConfirmButton color="#ccc" onPress={() => navigation.navigate('Home')}>
+        <ConfirmButton
+          color="#a1a1a1"
+          onPress={() => navigation.navigate('Home')}>
           <ConfirmButtonTitle>Cancel</ConfirmButtonTitle>
         </ConfirmButton>
       </ButtonsContainer>
